@@ -1,17 +1,38 @@
-import '../index.css';
+import '../index.css'
 import Header from './Header'
 import Main from './Main'
 import Footer from './Footer'
+import PopupWithForm from './PopupWithForm'
+import ImagePopup from './ImagePopup'
 
 function App() {
+
+  function handleEditAvatarClick() {
+    document.querySelector('.popup_type_avatar').classList.add('popup_active');
+  }
+
+  function handleEditProfileClick() {
+    document.querySelector('.popup_type_edit').classList.add('popup_active');
+  }
+
+  function handleAddPlaceClick() {
+    document.querySelector('.popup_type_add').classList.add('popup_active');
+  }
+
+
+
+
   return (
-    <div className="page">
       <div className="page__content">
         <Header />
-        <Main />
+        <Main 
+          onEditProfile={handleEditProfileClick}
+          onAddPlace={handleAddPlaceClick}
+          onEditAvatar={handleEditAvatarClick}
+        />
         <Footer />
       
-      {/*popup для изменения имени и деятельности*/}
+      {/*popup для изменения имени и деятельности - edit
     <div className="popup popup_type_edit">
       <div className="popup__container">
         <h2 className="popup__title">Редактировать профиль</h2>
@@ -24,8 +45,21 @@ function App() {
         </form>
         <button aria-label="Отменить изменения" type="button" className="popup__close-button popup__close-button_type_edit" />
       </div>
-    </div>
-    {/*popup для добавления карточки*/}
+    </div>*/}
+    <PopupWithForm
+        name="edit"
+        title="Редактировать профиль"
+        children={
+          <>
+            <input type="text" id="inputName" name="inputName" placeholder="Введите Ваше имя" className="form__input form__input_type_name" minLength={2} maxLength={40} required />
+            <span className="form__error" id="inputName-error" />
+            <input type="text" id="inputJob" name="inputJob" placeholder="Чем занимаетесь?" className="form__input form__input_type_job" minLength={2} maxLength={200} required />
+            <span className="form__error" id="inputJob-error" />
+          </>
+        }
+        saveButton="Сохранить"
+      />
+    {/*popup для добавления карточки - add
     <div className="popup popup_type_add">
       <div className="popup__container">
         <h2 className="popup__title">Новое место</h2>
@@ -38,16 +72,21 @@ function App() {
         </form>
         <button aria-label="Отменить изменения" type="button" className="popup__close-button popup__close-button_type_add" />
       </div>
-    </div>
-    {/*popup для отображения полной картинки*/}
-    <div className="popup popup_type_photo">
-      <div className="popup__container popup__container_type_photo">
-        <img className="popup__image" src="#" alt="#" />
-        <h2 className="popup__title popup__title_type_photo" />
-        <button aria-label="Закрыть окно просмотра" type="button" className="popup__close-button popup__close-button_type_photo" />
-      </div>
-    </div>
-    {/*popup подтверждения удаления карточки*/}
+    </div>*/}
+    <PopupWithForm
+        name="add"
+        title="Новое место"
+        children={
+          <>
+            <input type="text" id="inputAddTitle" name="inputAddTitle" placeholder="Название" className="form__input form__input_type_addTitle" minLength={2} maxLength={30} required />
+            <span className="form__error" id="inputAddTitle-error" />
+            <input type="url" id="inputURL" name="inputURL" placeholder="Ссылка на картинку" className="form__input form__input_type_addURL" required />
+            <span className="form__error" id="inputURL-error" />
+          </>
+        }
+        saveButton="Сохранить"
+      />
+    {/*popup подтверждения удаления карточки - delete
     <div className="popup popup_type_delete">
       <div className="popup__container">
         <h2 className="popup__title">Вы уверены?</h2>
@@ -56,8 +95,19 @@ function App() {
         </form>
         <button aria-label="Отменить удаление" type="button" className="popup__close-button popup__close-button_type_edit" />
       </div>
-    </div>
-    {/*popup для обновления фотографии профиля*/}
+    </div>*/}
+    <PopupWithForm
+        name="delete"
+        title="Вы уверены?"
+        children={
+          <>
+          </>
+        }
+        saveButton="Да"
+      />
+
+
+    {/*popup для обновления фотографии профиля - avatar
     <div className="popup popup_type_avatar">
       <div className="popup__container">
         <h2 className="popup__title">Обновить аватар</h2>
@@ -68,10 +118,24 @@ function App() {
         </form>
         <button aria-label="Отменить изменения" type="button" className="popup__close-button popup__close-button_type_add" />
       </div>
-    </div>
+    </div>*/}
+
+    <PopupWithForm
+        name="avatar"
+        title="Обновить аватар"
+        children={
+          <>
+            <input type="url" id="inputAvatar" name="inputAvatar" placeholder="Ссылка на картинку" className="form__input form__input_type_addAvatar" required />
+            <span className="form__error" id="inputAvatar-error" />
+          </>
+        }
+        saveButton="Сохранить"
+      />
+    
+    <ImagePopup />
+
     {/*шаблон для добавления карточек*/}
     <template className="cardsTemplate" />
-    </div>
     </div>
   );
 }

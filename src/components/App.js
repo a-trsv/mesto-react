@@ -1,3 +1,4 @@
+import React from 'react'
 import '../index.css'
 import Header from './Header'
 import Main from './Main'
@@ -7,18 +8,28 @@ import ImagePopup from './ImagePopup'
 
 function App() {
 
+  const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false)
+  const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false)
+  const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false)
+
+
   function handleEditAvatarClick() {
-    document.querySelector('.popup_type_avatar').classList.add('popup_active');
+    setEditAvatarPopupOpen(true)
   }
 
   function handleEditProfileClick() {
-    document.querySelector('.popup_type_edit').classList.add('popup_active');
+    setEditProfilePopupOpen(true)
   }
 
   function handleAddPlaceClick() {
-    document.querySelector('.popup_type_add').classList.add('popup_active');
+    setAddPlacePopupOpen(true)
   }
 
+  function closeAllPopups() {
+  setEditAvatarPopupOpen(false)
+  setEditProfilePopupOpen(false)
+  setAddPlacePopupOpen(false)
+}
 
 
 
@@ -47,9 +58,11 @@ function App() {
       </div>
     </div>*/}
     <PopupWithForm
-        name="edit"
-        title="Редактировать профиль"
-        children={
+        name = "edit"
+        title = "Редактировать профиль"
+        isOpen = {isEditProfilePopupOpen}
+        onClose = {closeAllPopups}
+        children = {
           <>
             <input type="text" id="inputName" name="inputName" placeholder="Введите Ваше имя" className="form__input form__input_type_name" minLength={2} maxLength={40} required />
             <span className="form__error" id="inputName-error" />
@@ -74,9 +87,11 @@ function App() {
       </div>
     </div>*/}
     <PopupWithForm
-        name="add"
-        title="Новое место"
-        children={
+        name = "add"
+        title = "Новое место"
+        isOpen = {isAddPlacePopupOpen}
+        onClose = {closeAllPopups}
+        children = {
           <>
             <input type="text" id="inputAddTitle" name="inputAddTitle" placeholder="Название" className="form__input form__input_type_addTitle" minLength={2} maxLength={30} required />
             <span className="form__error" id="inputAddTitle-error" />
@@ -97,9 +112,10 @@ function App() {
       </div>
     </div>*/}
     <PopupWithForm
-        name="delete"
-        title="Вы уверены?"
-        children={
+        name = "delete"
+        title = "Вы уверены?"
+        onClose = {closeAllPopups}
+        children = {
           <>
           </>
         }
@@ -121,9 +137,11 @@ function App() {
     </div>*/}
 
     <PopupWithForm
-        name="avatar"
-        title="Обновить аватар"
-        children={
+        name = "avatar"
+        title = "Обновить аватар"
+        isOpen = {isEditAvatarPopupOpen}
+        onClose = {closeAllPopups}
+        children = {
           <>
             <input type="url" id="inputAvatar" name="inputAvatar" placeholder="Ссылка на картинку" className="form__input form__input_type_addAvatar" required />
             <span className="form__error" id="inputAvatar-error" />

@@ -11,7 +11,8 @@ function App() {
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = React.useState(false)
   const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false)
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false)
-  const [selectedCard, setSelectedCard] = React.useState(false)
+  const [isImagePopupOpen, setImagePopupOpen] = React.useState(false) // Без этого, при {} попап с картинкой открыт всегда 
+  const [selectedCard, setSelectedCard] = React.useState({})
 
 
   function handleEditAvatarClick() {
@@ -28,13 +29,15 @@ function App() {
 
   function handleCardClick(card) {
     setSelectedCard(card)
+    setImagePopupOpen(true)
   }
 
   function closeAllPopups() {
     setEditAvatarPopupOpen(false)
     setEditProfilePopupOpen(false)
     setAddPlacePopupOpen(false)
-    setSelectedCard(false)
+    setImagePopupOpen(false)
+    setSelectedCard({})
   }
 
 
@@ -117,6 +120,7 @@ function App() {
 
       <ImagePopup
         card={selectedCard}
+        isOpen={isImagePopupOpen}
         onClose={closeAllPopups}
       />
     </div>

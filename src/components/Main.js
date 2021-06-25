@@ -39,7 +39,6 @@ function Main(props) {
                 type="button" 
                 aria-label="Загрузка своего фото"
                 >
-
               </button>
             </div>
             <div className="profile__info">
@@ -75,4 +74,4 @@ function Main(props) {
     )
 }
 
-export default Main;
+export default Main

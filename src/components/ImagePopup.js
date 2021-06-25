@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 function ImagePopup(props) {
     return(
@@ -14,4 +14,4 @@ function ImagePopup(props) {
     )
 }
 
-export default ImagePopup;
+export default ImagePopup

@@ -100,7 +100,6 @@ class Api {
     // Если происходит ошибка, отклоняем промис
     return Promise.reject(`${res.status}`)
     }
-        
 }
 
 const api = new Api({

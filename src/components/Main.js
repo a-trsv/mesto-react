@@ -1,25 +1,32 @@
 import React from 'react'
-import api from '../utils/api.js'
+import api from '../utils/api'
+import Card from './Card'
 
 function Main(props) {
 
   const [userName, setUserName] = React.useState()
   const [userDescription, setUserDescription] = React.useState()
   const [userAvatar, setUserAvatar] = React.useState()
+  const [cards, setCards] = React.useState([])
 
 
   React.useEffect(() => {
-    api.getUserInfo()
-      .then((apiData) => {
-        const apiUserData = apiData;
-        setUserName(apiUserData.name);
-        setUserDescription(apiUserData.about);
+      Promise.all([api.getUserInfo(), api.getCards()])
+      .then (apiData => {
+       //console.log(apiData)
+        const apiUserData = apiData[0] // Инфо по пользователю
+        // Загрузка имени и деятельности с сервера
+        setUserName(apiUserData.name)
+        setUserDescription(apiUserData.about)
         setUserAvatar(apiUserData.avatar)
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-  }, [userName, userDescription, userAvatar])
+        setCards(apiData[1])
+       })
+       // Если сервер не ответил, выводим ошибку в консоль
+       .catch((err) => {
+         console.log(err)
+       })
+    }, [])
+
 
     return (
     <main>
@@ -55,7 +62,15 @@ function Main(props) {
             onClick={props.onAddPlace} >
           </button>
         </section>
-        <section className="elements"></section>
+        <section className="elements">
+          {cards.map(card =>
+            <Card
+              key={card._id}
+              card={card}
+              onCardClick={props.onCardClick}
+              />
+            )}
+        </section>
       </main>
     )
 }

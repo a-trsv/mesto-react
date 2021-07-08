@@ -5,6 +5,7 @@ import Main from './Main'
 import Footer from './Footer'
 import PopupWithForm from './PopupWithForm'
 import EditProfilePopup from './EditProfilePopup'
+import EditAvatarPopup from './EditAvatarPopup'
 import ImagePopup from './ImagePopup'
 import api from '../utils/api'
 import { CurrentUserContext } from '../contexts/CurrentUserContext'
@@ -31,6 +32,18 @@ function App() {
 
     function handleUpdateUser(userData) {
         api.patchUserInfo(userData)
+            .then((userData) => {
+                setCurrentUser(userData)
+                // console.log(userData)
+                closeAllPopups()
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }
+
+    function handleUpdateAvatar(userData) {
+        api.patchUserAvatar(userData)
             .then((userData) => {
                 setCurrentUser(userData)
                 // console.log(userData)
@@ -132,7 +145,13 @@ function App() {
                     saveButton="Да"
                 />
 
-                <PopupWithForm
+                <EditAvatarPopup
+                    isOpen={isEditAvatarPopupOpen}
+                    onUpdateAvatar={handleUpdateAvatar}
+                    onClose={closeAllPopups}
+                />
+
+                {/* <PopupWithForm
                     name="avatar"
                     title="Обновить аватар"
                     isOpen={isEditAvatarPopupOpen}
@@ -145,7 +164,7 @@ function App() {
                         </>
                     }
                     saveButton="Сохранить"
-                />
+                /> */}
 
                 <ImagePopup
                     card={selectedCard}

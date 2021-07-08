@@ -91,7 +91,7 @@ class Api {
         })
             .then(res => this._checkServerResponse(res))
     }
-    patchUserAvatar(avatarSRC) {
+    patchUserAvatar(userData) {
         return fetch(`${this._address}/${this._groupId}/users/me/avatar`, {
             method: 'PATCH',
             headers: {
@@ -99,7 +99,7 @@ class Api {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                avatar: avatarSRC
+                avatar: userData.avatar
             })
         })
             .then(res => this._checkServerResponse(res))

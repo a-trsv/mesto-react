@@ -38,7 +38,7 @@ class Api {
         })
             .then(res => this._checkServerResponse(res))
     }
-    
+
     postCard({ name: inputName, link: inputSRC }) {
         return fetch(`${this._address}/${this._groupId}/cards`, {
             method: 'POST',
@@ -81,7 +81,7 @@ class Api {
         })
             .then(res => this._checkServerResponse(res))
     }
-    
+
     deleteLike(cardId) {
         return fetch(`${this._address}/${this._groupId}/cards/likes/${cardId}`, {
             method: 'DELETE',

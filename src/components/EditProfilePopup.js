@@ -47,17 +47,17 @@ function EditProfilePopup(props) {
         >
             <input
                 type="text" id="inputName" name="inputName"
-                placeholder="Введите Ваше имя" 
+                placeholder="Введите Ваше имя"
                 className="form__input form__input_type_name"
                 minLength={2} maxLength={40} required
                 onChange={handleChangeName}
             />
             <span className="form__error" id="inputName-error" />
             <input type="text" id="inputJob" name="inputJob"
-                placeholder="Чем занимаетесь?" 
+                placeholder="Чем занимаетесь?"
                 className="form__input form__input_type_job"
-                minLength={2} maxLength={200} required 
-                onChange={handleChangeJob}/>
+                minLength={2} maxLength={200} required
+                onChange={handleChangeJob} />
             <span className="form__error" id="inputJob-error" />
         </PopupWithForm>
 

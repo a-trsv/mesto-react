@@ -4,24 +4,7 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext'
 
 function Main(props) {
 
-    //   const [userName, setUserName] = React.useState('')
-    //   const [userDescription, setUserDescription] = React.useState('')
-    //   const [userAvatar, setUserAvatar] = React.useState('')
-    const currentUser = React.useContext(CurrentUserContext);
-    //   React.useEffect(() => {
-    //     Promise.all([api.getUserInfo(), api.getCards()])
-    //       .then(([userData, cardsData]) => {
-    //         setUserName(userData.name)
-    //         setUserDescription(userData.about)
-    //         setUserAvatar(userData.avatar)
-    //         setCards(cardsData)
-    //       })
-    //       // Если сервер не ответил, выводим ошибку в консоль
-    //       .catch((err) => {
-    //         console.log(err)
-    //       })
-    //   }, [])
-
+    const currentUser = React.useContext(CurrentUserContext)
 
     return (
         <main>

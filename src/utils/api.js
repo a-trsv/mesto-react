@@ -39,7 +39,7 @@ class Api {
             .then(res => this._checkServerResponse(res))
     }
 
-    postCard({ name: inputName, link: inputSRC }) {
+    postCard(apiData) {
         return fetch(`${this._address}/${this._groupId}/cards`, {
             method: 'POST',
             headers: {
@@ -47,8 +47,8 @@ class Api {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                name: inputName,
-                link: inputSRC
+                name: apiData.name,
+                link: apiData.link
             })
         })
             .then(res => this._checkServerResponse(res))

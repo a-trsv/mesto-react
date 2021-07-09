@@ -22,22 +22,12 @@ function App() {
     const [cards, setCards] = React.useState([])
 
     React.useEffect(() => {
-        api.getCards()
-            .then((apiData) => {
+        Promise.all([api.getUserInfo(), api.getCards()])
+            .then(([userData, apiData]) => {
+                setCurrentUser(userData)
                 setCards(apiData)
                 // console.log(apiData)
             })
-            .catch((err) => {
-                console.log(err)
-            })
-    }, [])
-
-    React.useEffect(() => {
-        api.getUserInfo()
-            .then((userData) => {
-                setCurrentUser(userData)
-            })
-            // Если сервер не ответил, выводим ошибку в консоль
             .catch((err) => {
                 console.log(err)
             })

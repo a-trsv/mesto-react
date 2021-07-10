@@ -1,13 +1,12 @@
 import React from 'react'
-import '../index.css'
 import Header from './Header'
 import Main from './Main'
 import Footer from './Footer'
-import PopupWithForm from './PopupWithForm'
 import EditProfilePopup from './EditProfilePopup'
 import EditAvatarPopup from './EditAvatarPopup'
 import AddPlacePopup from './AddPlacePopup'
 import ImagePopup from './ImagePopup'
+import ConfirmCardDelete from './ConfirmCardDelete'
 import api from '../utils/api'
 import { CurrentUserContext } from '../contexts/CurrentUserContext'
 
@@ -17,6 +16,8 @@ function App() {
     const [isEditProfilePopupOpen, setEditProfilePopupOpen] = React.useState(false)
     const [isAddPlacePopupOpen, setAddPlacePopupOpen] = React.useState(false)
     const [isImagePopupOpen, setImagePopupOpen] = React.useState(false)
+    {/* Заготовка для реализации попапа с подтверждением удаления карточки */}
+    const [isDeleteCardPopupOpen, setDeleteCardPopupOpen] = React.useState(false)
     const [selectedCard, setSelectedCard] = React.useState({})
     const [currentUser, setCurrentUser] = React.useState({})
     const [cards, setCards] = React.useState([])
@@ -149,16 +150,10 @@ function App() {
                     onClose={closeAllPopups}
                 />
 
-
-                <PopupWithForm
-                    name="delete"
-                    title="Вы уверены?"
+                {/* Заготовка для реализации попапа с подтверждением удаления карточки */}
+                <ConfirmCardDelete
+                    isOpen={isDeleteCardPopupOpen}
                     onClose={closeAllPopups}
-                    children={
-                        <>
-                        </>
-                    }
-                    saveButton="Да"
                 />
 
                 <ImagePopup

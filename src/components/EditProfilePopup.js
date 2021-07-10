@@ -2,11 +2,10 @@ import React from 'react'
 import PopupWithForm from './PopupWithForm'
 import { CurrentUserContext } from '../contexts/CurrentUserContext'
 
-function EditProfilePopup(props) {
+function EditProfilePopup({onUpdateUser, isOpen, onClose}) {
 
     const [name, setName] = React.useState('')
     const [description, setDescription] = React.useState('')
-
     // Подписка на контекст
     const currentUser = React.useContext(CurrentUserContext)
 
@@ -22,9 +21,9 @@ function EditProfilePopup(props) {
         evt.preventDefault()
 
         // Передаём значения управляемых компонентов во внешний обработчик
-        props.onUpdateUser({
-            name: name,
-            about: description,
+        onUpdateUser({
+            name,
+            about: description
         })
     }
 
@@ -40,8 +39,8 @@ function EditProfilePopup(props) {
         <PopupWithForm
             name="edit"
             title="Редактировать профиль"
-            isOpen={props.isOpen}
-            onClose={props.onClose}
+            isOpen={isOpen}
+            onClose={onClose}
             onSubmit={handleSubmit}
             saveButton="Сохранить"
         >
@@ -51,13 +50,15 @@ function EditProfilePopup(props) {
                 className="form__input form__input_type_name"
                 minLength={2} maxLength={40} required
                 onChange={handleChangeName}
+                value={name}
             />
             <span className="form__error" id="inputName-error" />
             <input type="text" id="inputJob" name="inputJob"
                 placeholder="Чем занимаетесь?"
                 className="form__input form__input_type_job"
                 minLength={2} maxLength={200} required
-                onChange={handleChangeJob} />
+                onChange={handleChangeJob}
+                value={description} />
             <span className="form__error" id="inputJob-error" />
         </PopupWithForm>
     )
